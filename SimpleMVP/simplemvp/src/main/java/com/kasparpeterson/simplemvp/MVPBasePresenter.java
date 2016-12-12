@@ -9,14 +9,16 @@ import java.lang.ref.WeakReference;
 /**
  * Created by kaspar on 01/09/16.
  */
-public abstract class MVPBasePresenter<V extends MVPBaseViewOperations, M extends MVPBaseModel> {
+public abstract class MVPBasePresenter<V extends MVPBaseViewOperations, M extends MVPBaseModel>
+        implements MVPBasePresenterModelOperations {
 
     private WeakReference<V> view;
     private M model;
 
-    public MVPBasePresenter(V view) {
+    public MVPBasePresenter(V view, M model) {
         this.view = new WeakReference<>(view);
-        this.model = initialiseModel();
+        this.model = model;
+        model.setPresenter(this);
     }
 
     void onConfigurationChanged(V view) {
@@ -56,7 +58,6 @@ public abstract class MVPBasePresenter<V extends MVPBaseViewOperations, M extend
         return null;
     }
 
-    @NonNull protected abstract M initialiseModel();
     @NonNull protected M getModel() {
         return model;
     }

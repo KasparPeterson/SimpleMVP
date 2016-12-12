@@ -1,7 +1,5 @@
 package com.kasparpeterson.example;
 
-import android.support.annotation.NonNull;
-
 /**
  * Created by kaspar on 02/12/2016.
  */
@@ -9,14 +7,8 @@ import android.support.annotation.NonNull;
 public class MainPresenter extends MainMVP.PresenterViewOperations
         implements MainMVP.PresenterModelOperations {
 
-    public MainPresenter(MainMVP.ViewOperations view) {
-        super(view);
-    }
-
-    @NonNull
-    @Override
-    protected MainMVP.ModelOperations initialiseModel() {
-        return new MainModel(this);
+    public MainPresenter(MainMVP.ViewOperations view, MainMVP.ModelOperations model) {
+        super(view, model);
     }
 
     @Override

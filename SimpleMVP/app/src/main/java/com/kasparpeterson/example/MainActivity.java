@@ -22,7 +22,7 @@ public class MainActivity extends MVPBaseActivity<MainMVP.PresenterViewOperation
 
     @Override
     protected MainMVP.PresenterViewOperations initialisePresenter() {
-        return new MainPresenter(this);
+        return new MainPresenter(this, new MainModel());
     }
 
     @Override
