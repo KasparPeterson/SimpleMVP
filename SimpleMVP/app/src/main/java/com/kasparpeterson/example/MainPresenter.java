@@ -34,12 +34,12 @@ public class MainPresenter extends MainMVP.PresenterViewOperations
         if (getView() != null) {
             boolean isValid = true;
 
-            if (Utils.isStringEmpty(firstName)) {
+            if (Utils.isStringEmpty(firstName) || firstName.length() < 2) {
                 getView().showFirstNameError();
                 isValid = false;
             }
 
-            if (Utils.isStringEmpty(lastName)) {
+            if (Utils.isStringEmpty(lastName) || lastName.length() < 2) {
                 getView().showLastNameError();
                 isValid = false;
             }

@@ -27,16 +27,16 @@ public class MainActivity extends MVPBaseActivity<MainMVP.PresenterViewOperation
 
     @Override
     public void showFirstNameError() {
-
+        // TODO:
     }
 
     @Override
     public void showLastNameError() {
-
+        // TODO:
     }
 
     @Override
     public void showSuccess() {
-
+        // TODO:
     }
 }
