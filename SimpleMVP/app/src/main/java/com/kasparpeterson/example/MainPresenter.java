@@ -21,12 +21,12 @@ public class MainPresenter extends MainMVP.PresenterViewOperations
 
     @Override
     public void onSaveDetailsSuccessful() {
-
+        // TODO:
     }
 
     @Override
     public void onSaveDetailsFailed() {
-
+        // TODO:
     }
 
     @Override
