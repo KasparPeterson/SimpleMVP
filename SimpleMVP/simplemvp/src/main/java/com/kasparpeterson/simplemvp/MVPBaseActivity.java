@@ -10,7 +10,8 @@ import android.util.Log;
  *
  * Created by kaspar on 30/08/16.
  */
-public abstract class MVPBaseActivity<P extends MVPBasePresenter> extends AppCompatActivity {
+public abstract class MVPBaseActivity<P extends MVPBasePresenter> extends AppCompatActivity
+        implements MVPBaseViewOperations {
 
     private final String TAG = MVPBaseActivity.class.getSimpleName();
     private MVPStateMaintainer MVPStateMaintainer;
@@ -42,6 +43,16 @@ public abstract class MVPBaseActivity<P extends MVPBasePresenter> extends AppCom
     protected void onDestroy() {
         super.onDestroy();
         presenter.onDestory(isChangingConfigurations());
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
+
+    @Override
+    public void handleOnBackPressed() {
+        super.onBackPressed();
     }
 
     protected void setupPresenter(MVPBaseViewOperations viewOperations, String TAG, String presenterTAG) {

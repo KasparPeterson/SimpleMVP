@@ -20,11 +20,10 @@ interface MainMVP {
 
     // View -> Presenter
     abstract class PresenterViewOperations extends MVPBasePresenter<ViewOperations, ModelOperations> {
-
         public static final String TAG = PresenterViewOperations.class.getSimpleName();
 
-        public PresenterViewOperations(ViewOperations view) {
-            super(view);
+        public PresenterViewOperations(ViewOperations view, ModelOperations model) {
+            super(view, model);
         }
 
         abstract void onContinue(String firstName, String lastName);
@@ -38,10 +37,6 @@ interface MainMVP {
 
     // Presenter -> Model
     abstract class ModelOperations extends MVPBaseModel<PresenterModelOperations> {
-        public ModelOperations(PresenterModelOperations presenter) {
-            super(presenter);
-        }
-
         abstract void saveDetails(String firstName, String lastName);
     }
 

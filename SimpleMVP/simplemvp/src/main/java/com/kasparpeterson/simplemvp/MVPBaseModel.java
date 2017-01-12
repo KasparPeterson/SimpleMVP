@@ -10,7 +10,11 @@ public abstract class MVPBaseModel<P extends MVPBasePresenterModelOperations> {
 
     private P presenter;
 
-    public MVPBaseModel(P presenter) {
+    public MVPBaseModel() {
+
+    }
+
+    public void setPresenter(P presenter) {
         this.presenter = presenter;
     }
 

@@ -6,13 +6,9 @@ package com.kasparpeterson.example;
 
 public class MainModel extends MainMVP.ModelOperations {
 
-    public MainModel(MainMVP.PresenterModelOperations presenter) {
-        super(presenter);
-    }
-
     @Override
     void saveDetails(String firstName, String lastName) {
-
+        getPresenter().onSaveDetailsSuccessful();
     }
 
     @Override

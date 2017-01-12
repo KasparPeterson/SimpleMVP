@@ -1,7 +1,5 @@
 package com.kasparpeterson.example;
 
-import android.support.annotation.NonNull;
-
 /**
  * Created by kaspar on 02/12/2016.
  */
@@ -9,24 +7,23 @@ import android.support.annotation.NonNull;
 public class MainPresenter extends MainMVP.PresenterViewOperations
         implements MainMVP.PresenterModelOperations {
 
-    public MainPresenter(MainMVP.ViewOperations view) {
-        super(view);
-    }
-
-    @NonNull
-    @Override
-    protected MainMVP.ModelOperations initialiseModel() {
-        return new MainModel(this);
+    public MainPresenter(MainMVP.ViewOperations view, MainMVP.ModelOperations model) {
+        super(view, model);
     }
 
     @Override
     public void onSaveDetailsSuccessful() {
-        // TODO:
+        if (getView() != null) {
+            getView().showSuccess();
+        }
     }
 
     @Override
     public void onSaveDetailsFailed() {
-        // TODO:
+        if (getView() != null) {
+            getView().showFirstNameError();
+            getView().showLastNameError();
+        }
     }
 
     @Override
@@ -45,7 +42,7 @@ public class MainPresenter extends MainMVP.PresenterViewOperations
             }
 
             if (isValid) {
-                getView().showSuccess();
+                getModel().saveDetails(firstName, lastName);
             }
         }
     }
