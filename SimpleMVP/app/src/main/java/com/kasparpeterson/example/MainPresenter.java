@@ -1,9 +1,5 @@
 package com.kasparpeterson.example;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 /**
  * Created by kaspar on 02/12/2016.
  */
