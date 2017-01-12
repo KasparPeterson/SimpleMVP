@@ -52,6 +52,14 @@ public abstract class MVPBasePresenter<V extends MVPBaseViewOperations, M extend
         // For overriding
     }
 
+    // For overriding. Call super.onBackPressed() when not handling back button in child Presenter
+    // class
+    public void onBackPressed() {
+        if (getView() != null) {
+            getView().handleOnBackPressed();
+        }
+    }
+
     @Nullable
     protected V getView() {
         if (view != null) return view.get();

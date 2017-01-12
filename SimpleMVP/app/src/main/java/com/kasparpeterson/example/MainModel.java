@@ -8,7 +8,7 @@ public class MainModel extends MainMVP.ModelOperations {
 
     @Override
     void saveDetails(String firstName, String lastName) {
-
+        getPresenter().onSaveDetailsSuccessful();
     }
 
     @Override

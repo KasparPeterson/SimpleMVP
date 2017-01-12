@@ -1,5 +1,9 @@
 package com.kasparpeterson.example;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 /**
  * Created by kaspar on 02/12/2016.
  */
@@ -13,12 +17,17 @@ public class MainPresenter extends MainMVP.PresenterViewOperations
 
     @Override
     public void onSaveDetailsSuccessful() {
-        // TODO:
+        if (getView() != null) {
+            getView().showSuccess();
+        }
     }
 
     @Override
     public void onSaveDetailsFailed() {
-        // TODO:
+        if (getView() != null) {
+            getView().showFirstNameError();
+            getView().showLastNameError();
+        }
     }
 
     @Override
@@ -37,7 +46,7 @@ public class MainPresenter extends MainMVP.PresenterViewOperations
             }
 
             if (isValid) {
-                getView().showSuccess();
+                getModel().saveDetails(firstName, lastName);
             }
         }
     }
