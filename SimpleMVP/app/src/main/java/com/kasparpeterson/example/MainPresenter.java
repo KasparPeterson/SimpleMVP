@@ -13,37 +13,46 @@ public class MainPresenter extends MainMVP.PresenterViewOperations
 
     @Override
     public void onSaveDetailsSuccessful() {
-        if (getView() != null) {
-            getView().showSuccess();
-        }
+        onView(new ViewAction<MainMVP.ViewOperations>() {
+            @Override
+            public void onAction(MainMVP.ViewOperations view) {
+                view.showSuccess();
+            }
+        });
     }
 
     @Override
     public void onSaveDetailsFailed() {
-        if (getView() != null) {
-            getView().showFirstNameError();
-            getView().showLastNameError();
-        }
+        onView(new ViewAction<MainMVP.ViewOperations>() {
+            @Override
+            public void onAction(MainMVP.ViewOperations view) {
+                view.showFirstNameError();
+                view.showLastNameError();
+            }
+        });
     }
 
     @Override
-    void onContinue(String firstName, String lastName) {
-        if (getView() != null) {
-            boolean isValid = true;
+    void onContinue(final String firstName, final String lastName) {
+        onView(new ViewAction<MainMVP.ViewOperations>() {
+            @Override
+            public void onAction(MainMVP.ViewOperations view) {
+                boolean isValid = true;
 
-            if (Utils.isStringEmpty(firstName) || firstName.length() < 2) {
-                getView().showFirstNameError();
-                isValid = false;
-            }
+                if (Utils.isStringEmpty(firstName) || firstName.length() < 2) {
+                    view.showFirstNameError();
+                    isValid = false;
+                }
 
-            if (Utils.isStringEmpty(lastName) || lastName.length() < 2) {
-                getView().showLastNameError();
-                isValid = false;
-            }
+                if (Utils.isStringEmpty(lastName) || lastName.length() < 2) {
+                    view.showLastNameError();
+                    isValid = false;
+                }
 
-            if (isValid) {
-                getModel().saveDetails(firstName, lastName);
+                if (isValid) {
+                    getModel().saveDetails(firstName, lastName);
+                }
             }
-        }
+        });
     }
 }
