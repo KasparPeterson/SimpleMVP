@@ -2,10 +2,7 @@ package com.kasparpeterson.example;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -18,14 +15,13 @@ import static org.mockito.Mockito.verify;
 public class MainPresenterTest {
 
     MainMVP.ViewOperations view;
-    MainMVP.ModelOperations model;
     MainPresenter presenter;
 
     @Before
     public void setup() {
         view = mock(MainMVP.ViewOperations.class);
-        model = mock(MainMVP.ModelOperations.class);
-        presenter = new MainPresenter(view, model);
+        presenter = new MainPresenter();
+        presenter.setView(view);
     }
 
     @Test
@@ -98,7 +94,6 @@ public class MainPresenterTest {
         presenter.onContinue(first, last);
         verify(view, never()).showFirstNameError();
         verify(view, never()).showLastNameError();
-        verify(model, times(1)).saveDetails(first, last);
     }
 
     @Test

@@ -6,10 +6,8 @@ import android.widget.EditText;
 
 import com.kasparpeterson.simplemvp.MVPBaseActivity;
 
-public class MainActivity extends MVPBaseActivity<MainMVP.PresenterViewOperations>
+public class MainActivity extends MVPBaseActivity<MainMVP.PresenterViewOperations, MainMVP.ViewOperations>
         implements MainMVP.ViewOperations {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
 
     private EditText firstNameEditText;
     private EditText lastNameEditText;
@@ -31,13 +29,13 @@ public class MainActivity extends MVPBaseActivity<MainMVP.PresenterViewOperation
     }
 
     @Override
-    protected void callSetupPresenter() {
-        setupPresenter(this, TAG, MainMVP.PresenterViewOperations.TAG);
+    protected MainMVP.ViewOperations getView() {
+        return this;
     }
 
     @Override
-    protected MainMVP.PresenterViewOperations initialisePresenter() {
-        return new MainPresenter(this, new MainModel());
+    protected MainMVP.PresenterViewOperations createPresenter() {
+        return new MainPresenter();
     }
 
     @Override

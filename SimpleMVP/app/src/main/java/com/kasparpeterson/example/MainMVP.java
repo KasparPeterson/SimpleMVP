@@ -1,10 +1,7 @@
 package com.kasparpeterson.example;
 
-
-import com.kasparpeterson.simplemvp.MVPBaseModel;
 import com.kasparpeterson.simplemvp.MVPBasePresenter;
-import com.kasparpeterson.simplemvp.MVPBasePresenterModelOperations;
-import com.kasparpeterson.simplemvp.MVPBaseViewOperations;
+import com.kasparpeterson.simplemvp.MVPBaseView;
 
 /**
  * Created by kaspar on 02/12/2016.
@@ -12,32 +9,14 @@ import com.kasparpeterson.simplemvp.MVPBaseViewOperations;
 interface MainMVP {
 
     // Presenter -> View
-    interface ViewOperations extends MVPBaseViewOperations {
+    interface ViewOperations extends MVPBaseView {
         void showFirstNameError();
         void showLastNameError();
         void showSuccess();
     }
 
     // View -> Presenter
-    abstract class PresenterViewOperations extends MVPBasePresenter<ViewOperations, ModelOperations> {
-        public static final String TAG = PresenterViewOperations.class.getSimpleName();
-
-        public PresenterViewOperations(ViewOperations view, ModelOperations model) {
-            super(view, model);
-        }
-
+    abstract class PresenterViewOperations extends MVPBasePresenter<ViewOperations> {
         abstract void onContinue(String firstName, String lastName);
     }
-
-    // Model -> Presenter
-    interface PresenterModelOperations extends MVPBasePresenterModelOperations {
-        void onSaveDetailsSuccessful();
-        void onSaveDetailsFailed();
-    }
-
-    // Presenter -> Model
-    abstract class ModelOperations extends MVPBaseModel<PresenterModelOperations> {
-        abstract void saveDetails(String firstName, String lastName);
-    }
-
 }

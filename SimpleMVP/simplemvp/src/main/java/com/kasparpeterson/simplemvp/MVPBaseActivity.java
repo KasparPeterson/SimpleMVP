@@ -3,51 +3,49 @@ package com.kasparpeterson.simplemvp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 /**
- * This is View in MVP (Model-View-Presenter) pattern.
- *
  * Created by kaspar on 30/08/16.
  */
-public abstract class MVPBaseActivity<P extends MVPBasePresenter> extends AppCompatActivity
-        implements MVPBaseViewOperations {
+public abstract class MVPBaseActivity<P extends MVPBasePresenter, V extends MVPBaseView>
+        extends AppCompatActivity implements MVPBaseView {
 
-    private final String TAG = MVPBaseActivity.class.getSimpleName();
+    private final String TAG = "activity_tag";
+    private final String PRESENTER_TAG = "presenter_tag";
     private MVPStateMaintainer MVPStateMaintainer;
-    private MVPBaseViewOperations viewOperations;
     private P presenter;
-    private String presenterTAG;
-    private Bundle savedInstanceState;
+
+    private boolean isJustCreated;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.savedInstanceState = savedInstanceState;
-        callSetupPresenter();
+        setupPresenter();
+        isJustCreated = true;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.onResume();
+        if (isJustCreated && presenter != null) {
+            presenter.onViewAttached();
+        }
+        isJustCreated = false;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.onDestory(isChangingConfigurations());
+        if (presenter != null)
+            presenter.onDestory(isChangingConfigurations());
     }
 
     @Override
     public void onBackPressed() {
-        presenter.onBackPressed();
+        if (presenter != null)
+            presenter.onBackPressed();
+        else
+            super.onBackPressed();
     }
 
     @Override
@@ -55,51 +53,50 @@ public abstract class MVPBaseActivity<P extends MVPBasePresenter> extends AppCom
         super.onBackPressed();
     }
 
-    protected void setupPresenter(MVPBaseViewOperations viewOperations, String TAG, String presenterTAG) {
-        this.viewOperations = viewOperations;
-        this.presenterTAG = presenterTAG;
+    protected void setupPresenter() {
+        createStateMaintainerIfNecessary();
+        initialisePresenter();
+    }
 
-        if (MVPStateMaintainer == null) {
+    private void createStateMaintainerIfNecessary() {
+        if (MVPStateMaintainer == null)
             MVPStateMaintainer = new MVPStateMaintainer(getSupportFragmentManager(), TAG);
-        }
+    }
 
-        if (MVPStateMaintainer.firstTimeIn()) {
-            initialisePresenterForTheFirstTime();
-        } else {
+    private void initialisePresenter() {
+        if (MVPStateMaintainer.isStateMaintainerCreated())
             reinitialisePresenter();
-        }
+        else
+            initialisePresenterForTheFirstTime();
     }
 
     private void initialisePresenterForTheFirstTime() {
-        presenter = initialisePresenter();
-        if (savedInstanceState != null) {
-            presenter.onRestoreInstanceState(savedInstanceState);
-        }
-        MVPStateMaintainer.put(presenterTAG, presenter);
+        presenter = createPresenter();
+        //noinspection unchecked
+        presenter.setView(getView());
+        MVPStateMaintainer.initialiseStateMaintainer();
+        MVPStateMaintainer.put(PRESENTER_TAG, presenter);
     }
 
+    @SuppressWarnings("unchecked")
     private void reinitialisePresenter() {
-        presenter = MVPStateMaintainer.get(presenterTAG);
+        presenter = MVPStateMaintainer.get(PRESENTER_TAG);
 
-        if (presenter == null) {
-            Log.d(TAG, "Reinitialising presenter!");
+        if (presenter == null)
             initialisePresenterForTheFirstTime();
-        } else {
-            presenter.onConfigurationChanged(viewOperations);
-        }
+        else
+            presenter.setView(getView());
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        presenter.onSaveInstanceState(outState);
     }
 
-    // This is meant for the child of this class to call setupPresenter()
-    protected abstract void callSetupPresenter();
-    // This is meant for the child of this class to initialise and return Presenter
-    protected abstract P initialisePresenter();
     protected P getPresenter() {
         return presenter;
     }
+
+    protected abstract V getView();
+    protected abstract P createPresenter();
 }

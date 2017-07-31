@@ -4,33 +4,7 @@ package com.kasparpeterson.example;
  * Created by kaspar on 02/12/2016.
  */
 
-public class MainPresenter extends MainMVP.PresenterViewOperations
-        implements MainMVP.PresenterModelOperations {
-
-    public MainPresenter(MainMVP.ViewOperations view, MainMVP.ModelOperations model) {
-        super(view, model);
-    }
-
-    @Override
-    public void onSaveDetailsSuccessful() {
-        onView(new ViewAction<MainMVP.ViewOperations>() {
-            @Override
-            public void onAction(MainMVP.ViewOperations view) {
-                view.showSuccess();
-            }
-        });
-    }
-
-    @Override
-    public void onSaveDetailsFailed() {
-        onView(new ViewAction<MainMVP.ViewOperations>() {
-            @Override
-            public void onAction(MainMVP.ViewOperations view) {
-                view.showFirstNameError();
-                view.showLastNameError();
-            }
-        });
-    }
+public class MainPresenter extends MainMVP.PresenterViewOperations {
 
     @Override
     void onContinue(final String firstName, final String lastName) {
@@ -50,9 +24,13 @@ public class MainPresenter extends MainMVP.PresenterViewOperations
                 }
 
                 if (isValid) {
-                    getModel().saveDetails(firstName, lastName);
+                    saveDetails(firstName, lastName);
                 }
             }
         });
+    }
+
+    private void saveDetails(final String firstName, final String lastName) {
+        // saving to somewhere
     }
 }
