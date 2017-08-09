@@ -1,14 +1,18 @@
-package ${packageName};
+package com.kasparpeterson.example;
 
 import com.kasparpeterson.simplemvp.MVPBasePresenter;
 import com.kasparpeterson.simplemvp.MVPBaseView;
 
-interface ${className}MVP {
+/**
+ * Created by kaspar on 02/12/2016.
+ */
+interface MainContract {
 
     // Presenter -> View
     interface ViewOperations extends MVPBaseView {
         void showFirstNameError();
         void showLastNameError();
+        void showSuccess();
     }
 
     // View -> Presenter

@@ -4,13 +4,13 @@ package com.kasparpeterson.example;
  * Created by kaspar on 02/12/2016.
  */
 
-public class MainPresenter extends MainMVP.PresenterViewOperations {
+public class MainPresenter extends MainContract.PresenterViewOperations {
 
     @Override
     void onContinue(final String firstName, final String lastName) {
-        onView(new ViewAction<MainMVP.ViewOperations>() {
+        onView(new ViewAction<MainContract.ViewOperations>() {
             @Override
-            public void onAction(MainMVP.ViewOperations view) {
+            public void onAction(MainContract.ViewOperations view) {
                 boolean isValid = true;
 
                 if (Utils.isStringEmpty(firstName) || firstName.length() < 2) {

@@ -11,8 +11,8 @@
         id="className"
         name="Activity Name"
         type="string"
-        constraints="class|unique|nonempty"
-        default="My"
+        constraints="class|nonempty"
+        default=""
         help="The name (prefix) of the activity class to create" />
 
     <globals file="globals.xml.ftl" />
