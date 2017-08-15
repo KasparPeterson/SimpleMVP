@@ -32,7 +32,7 @@ class MyCoolPresenter: MyCoolContract.Presenter() {
 
 Create Activity:
 ```kotlin
-class MyCoolActivity: BaseActivity<MyCoolContract.Presenter, MyCoolContract.View>(),
+class MyCoolActivity: MVPBaseActivity<MyCoolContract.Presenter, MyCoolContract.View>(),
         MyCoolContract.View {
 
     override fun show(state: MyCoolViewState) {
