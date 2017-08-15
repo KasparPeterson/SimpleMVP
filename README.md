@@ -49,3 +49,8 @@ class MyCoolActivity: BaseActivity<MyCoolContract.Presenter, MyCoolContract.View
 
 }
 ```
+
+### Download
+```
+compile 'com.kasparpeterson:simplemvp:2.0.0'
+```
