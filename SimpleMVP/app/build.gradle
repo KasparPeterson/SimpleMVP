@@ -20,6 +20,8 @@ android {
 }
 
 dependencies {
+    testCompile "junit:junit:$junit_version"
+    testCompile "org.mockito:mockito-core:$mockito_version"
     compile "com.android.support:appcompat-v7:$support_version"
     compile project(path: ':simplemvp')
 }
