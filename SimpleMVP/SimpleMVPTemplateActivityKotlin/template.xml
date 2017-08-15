@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<template
+    format="4"
+    revision="1"
+    name="SimpleMVP Kotlin Activity"
+    description="Creates a new SimpleMVP Activity">
+
+    <category value="Other" />
+
+    <parameter
+        id="className"
+        name="Activity Name"
+        type="string"
+        constraints="class|nonempty"
+        default=""
+        help="The name (prefix) of the activity class to create" />
+
+    <parameter
+        id="includeLayout"
+        name="Create layout?"
+        type="boolean"
+        default="true"
+        help="Generate a layout XML for the fragment" />
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>
