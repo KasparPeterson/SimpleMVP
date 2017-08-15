@@ -16,9 +16,11 @@
 
     <open file="${escapeXmlAttribute(srcOut)}/${className}Activity.java" />
 
-    <instantiate from="res/layout/activity.xml.ftl"
+    <#if includeLayout>
+      <instantiate from="res/layout/activity.xml.ftl"
                    to="${escapeXmlAttribute(resOut)}/layout/activity_${classToResource(className)}.xml" />
 
-    <open file="${escapeXmlAttribute(resOut)}/layout/activity_${classToResource(className)}.xml" />
+      <open file="${escapeXmlAttribute(resOut)}/layout/activity_${classToResource(className)}.xml" />
+    </#if>
 
 </recipe>
