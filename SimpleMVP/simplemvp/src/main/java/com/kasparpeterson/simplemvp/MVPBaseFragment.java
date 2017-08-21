@@ -35,6 +35,12 @@ public abstract class MVPBaseFragment<P extends MVPBasePresenter, V extends MVPB
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (presenter != null)

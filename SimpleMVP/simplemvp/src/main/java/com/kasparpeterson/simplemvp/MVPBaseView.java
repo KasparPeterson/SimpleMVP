@@ -5,4 +5,5 @@ package com.kasparpeterson.simplemvp;
  */
 public interface MVPBaseView {
     void handleOnBackPressed();
+    void finish();
 }

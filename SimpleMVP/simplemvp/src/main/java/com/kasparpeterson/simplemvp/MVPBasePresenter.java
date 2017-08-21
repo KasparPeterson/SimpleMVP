@@ -25,6 +25,11 @@ public abstract class MVPBasePresenter<V extends MVPBaseView> {
     }
 
     // For overriding
+    public void onResume() {
+
+    }
+
+    // For overriding
     public void onDestroy() {
 
     }

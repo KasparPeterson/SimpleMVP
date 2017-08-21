@@ -34,6 +34,12 @@ public abstract class MVPBaseActivity<P extends MVPBasePresenter, V extends MVPB
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (presenter != null)
