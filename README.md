@@ -1,5 +1,5 @@
 # SimpleMVP
-Small Android library to help you achieve MVP (Model - View - Presenter) for your Android projects.
+Small Android library to help you achieve MVP (Model - View - Presenter) for your Android projects. State maintaining Presenter can be added to Activity or Fragment.
 
 ### Usage
 
@@ -46,7 +46,26 @@ class MyCoolActivity: MVPBaseActivity<MyCoolContract.Presenter, MyCoolContract.V
     override fun createPresenter(): MyCoolContract.Presenter {
         return MyCoolPresenter()
     }
+}
+```
 
+Or create Fragment:
+```kotlin
+class MyCoolFragment : MVPBaseFragment<MyCoolContract.Presenter, MyCoolContract.View>(),
+        MyCoolContract.View {
+        
+    override fun show(state: MyCoolViewState) {
+        // show your new view state
+    }
+
+    override fun getFragmentView(): MyCoolContract.View {
+        return this
+    }
+
+    override fun createPresenter(): MyCoolContract.Presenter {
+        return MyCoolPresenter()
+    }
+    
 }
 ```
 
