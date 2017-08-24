@@ -71,5 +71,5 @@ class MyCoolFragment : MVPBaseFragment<MyCoolContract.Presenter, MyCoolContract.
 
 ### Download
 ```
-compile 'com.kasparpeterson:simplemvp:2.2.0'
+compile 'com.kasparpeterson:simplemvp:2.3.0'
 ```
