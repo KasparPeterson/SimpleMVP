@@ -2,7 +2,9 @@ package com.kasparpeterson.simplemvp;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 /**
  * Created by kaspar on 30/08/16.
@@ -57,6 +59,16 @@ public abstract class MVPBaseActivity<P extends MVPBasePresenter, V extends MVPB
     @Override
     public void handleOnBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void showToast(@StringRes int stringRes) {
+        showToast(getString(stringRes));
+    }
+
+    @Override
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
     protected void setupPresenter() {
