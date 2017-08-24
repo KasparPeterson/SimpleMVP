@@ -69,6 +69,17 @@ class MyCoolFragment : MVPBaseFragment<MyCoolContract.Presenter, MyCoolContract.
 }
 ```
 
+### Templates for Android Studio
+
+1. copy entire folder 'SimpleMVPTemplateKotlin' to /Applications/Android Studio.app/Contents/plugins/android/lib/templates/other/
+2. Restart AS
+3. Create package if needed (e.g. "settings")
+4. Right click on package -> New -> Other -> SimpleMVP Activity
+5. Enter name (e.g. "Settings")
+6. Finish
+
+There is also template for Java as well named 'SimpleMVPTemplate
+
 ### Download
 ```
 compile 'com.kasparpeterson:simplemvp:2.3.0'
