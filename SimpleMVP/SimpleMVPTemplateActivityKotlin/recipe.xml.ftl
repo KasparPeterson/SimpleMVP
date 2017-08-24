@@ -16,11 +16,21 @@
 
     <open file="${escapeXmlAttribute(srcOut)}/${className}Activity.kt" />
 
-    <#if includeLayout>
-      <instantiate from="res/layout/activity.xml.ftl"
-                   to="${escapeXmlAttribute(resOut)}/layout/activity_${classToResource(className)}.xml" />
+    <#if includeView>
+      <instantiate from="res/layout/view.xml.ftl"
+                   to="${escapeXmlAttribute(resOut)}/layout/${classToResource(className)}_view.xml" />
 
-      <open file="${escapeXmlAttribute(resOut)}/layout/activity_${classToResource(className)}.xml" />
+      <open file="${escapeXmlAttribute(resOut)}/layout/${classToResource(className)}_view.xml" />
+
+      <instantiate from="src/app_package/View.kt.ftl"
+                   to="${escapeXmlAttribute(srcOut)}/${className}View.kt" />
+
+      <open file="${escapeXmlAttribute(srcOut)}/${className}View.kt" />
+
+      <instantiate from="src/app_package/ViewState.kt.ftl"
+                   to="${escapeXmlAttribute(srcOut)}/${className}ViewState.kt" />
+
+      <open file="${escapeXmlAttribute(srcOut)}/${className}ViewState.kt" />
     </#if>
 
 </recipe>

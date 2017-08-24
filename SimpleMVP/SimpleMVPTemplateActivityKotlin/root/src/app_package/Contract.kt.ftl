@@ -5,7 +5,14 @@ import com.kasparpeterson.simplemvp.MVPBaseView
 
 interface ${className}Contract {
 
-    interface View: MVPBaseView
+	<#if !includeView>
+    	interface View: MVPBaseView
+    </#if>
+	<#if includeView>
+		interface View: MVPBaseView {
+			fun show(state: ${className}ViewState)
+		}
+    </#if>
 
     abstract class Presenter: MVPBasePresenter<View>()
 }

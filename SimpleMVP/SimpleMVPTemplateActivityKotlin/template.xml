@@ -16,11 +16,11 @@
         help="The name (prefix) of the activity class to create" />
 
     <parameter
-        id="includeLayout"
-        name="Create layout?"
+        id="includeView"
+        name="Create view?"
         type="boolean"
         default="true"
-        help="Generate a layout XML for the fragment" />
+        help="Generate a View with xml layout" />
 
     <globals file="globals.xml.ftl" />
     <execute file="recipe.xml.ftl" />
