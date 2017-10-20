@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<template
+    format="4"
+    revision="1"
+    name="SimpleMVP Kotlin Fragment"
+    description="Creates a new SimpleMVP Fragment in Kotlin">
+
+    <category value="Other" />
+
+    <parameter
+        id="className"
+        name="Fragment Name"
+        type="string"
+        constraints="class|nonempty"
+        default=""
+        help="The name (prefix) of the fragment class to create" />
+
+    <parameter
+        id="addState"
+        name="Create State?"
+        type="boolean"
+        default="true"
+        help="Generate a state holder class" />
+
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>
